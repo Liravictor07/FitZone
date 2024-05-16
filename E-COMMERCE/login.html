@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>FitZone Shop - Login</title>
+</head>
+
+<body>
+    <header>
+        <img src="img/logo.png" alt="FitZone Shop Logo" class="logo">
+    </header>
+
+    <section class="section-form">
+        <form>
+            <h2>Login</h2>
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" class="tbox" required><br>
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" class="tbox" required><br>
+            <button type="button" onclick="login()" class="button">Entrar</button>
+            <span id="mensagem"></span>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 FitZone Shop. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBjS9dZYN2pZD7Bo1RolO8dtmBmDFI21p4",
+            authDomain: "fitzone-shop.firebaseapp.com",
+            projectId: "fitzone-shop",
+            storageBucket: "fitzone-shop.appspot.com",
+            messagingSenderId: "1025642429432",
+            appId: "1:1025642429432:web:3317dc0733c6606e0e340d"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        var auth = null;
+
+        function login() {
+            var email = document.getElementById("email").value;
+            var senha = document.getElementById("senha").value;
+
+            firebase.auth().signInWithEmailAndPassword(email, senha)
+                .then(function (user) {
+                    alert("Login realizado com sucesso");
+                    auth = user;
+                    window.location.href = "produtos.html"; // Redireciona para a página inicial
+                }).catch(function (error) {
+                    document.getElementById("mensagem").innerText = "Falha ao logar: " + error.message;
+                });
+        }
+    </script>
+</body>
+
+</html>
